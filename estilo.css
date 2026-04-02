@@ -1,0 +1,140 @@
+/* 1. RESET E CONFIGURAÇÃO DA TELA */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Arial Black', sans-serif;
+    color: white;
+    background-color: #000;
+    /* IMAGEM DE FUNDO FIXA */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                      url('fundo.png');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    overflow-x: hidden;
+}
+
+/* 2. CABEÇALHO E MENU */
+header {
+    background: rgba(0, 0, 0, 0.9);
+    padding: 30px 10px;
+    text-align: center;
+    border-bottom: 4px solid #fff;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0 0 0;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* Links normais do menu */
+nav a {
+    color: #fff;
+    text-decoration: none;
+    border: 1px solid #fff;
+    padding: 8px 12px;
+    font-size: 0.8rem;
+    transition: 0.3s;
+}
+
+/* Hover dos links normais (apenas fica branco) */
+nav a:not(.btn-destaque):hover {
+    background: #fff;
+    color: #000;
+}
+
+/* --- O BOTÃO DE DESTAQUE (BAIXAR) --- */
+.btn-destaque {
+    border: 2px solid #fff;
+    font-weight: bold;
+    /* Ele já fica animando o tempo todo para chamar atenção */
+    animation: rgbSuave 3s infinite linear; 
+}
+
+.btn-destaque:hover {
+    transform: scale(1.1); /* Aumenta um pouco no hover */
+    filter: brightness(1.2); /* Dá uma "acesa" extra */
+}
+
+/* Reaproveitando a animação que já criamos */
+@keyframes rgbSuave {
+    0% { background-color: #ff0000; border-color: #ff0000; color: #fff; }
+    20% { background-color: #ffff00; border-color: #ffff00; color: #000; }
+    40% { background-color: #00ff00; border-color: #00ff00; color: #000; }
+    60% { background-color: #00ffff; border-color: #00ffff; color: #000; }
+    80% { background-color: #0000ff; border-color: #0000ff; color: #fff; }
+    100% { background-color: #ff0000; border-color: #ff0000; color: #fff; }
+}
+/* 3. CONTEÚDO PRINCIPAL */
+main {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+section {
+    background: rgba(20, 20, 20, 0.9);
+    padding: 30px;
+    margin: 40px 0;
+    border-radius: 5px;
+    border-left: 8px solid #fff;
+}
+
+/* 4. BOTÕES COM EFEITO RGB (PISCANDO) */
+button {
+    background: #fff;
+    color: #000;
+    border: 3px solid #fff;
+    padding: 15px;
+    width: 100%;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+/* O "Pulo do Gato": O que acontece quando passa o mouse */
+button:hover {
+    color: #fff;
+    /* A animação dura 0.4 segundos e repete para sempre */
+    animation: rgbPisca 5s infinite linear;
+    transform: scale(1.02);
+}
+
+/* DEFINIÇÃO DAS CORES DO RGB */
+@keyframes rgbPisca {
+    0%   { background-color: #ff0000; border-color: #ff0000; } /* Vermelho */
+    25%  { background-color: #00ff00; border-color: #00ff00; } /* Verde */
+    50%  { background-color: #0000ff; border-color: #0000ff; } /* Azul */
+    75%  { background-color: #ffff00; border-color: #ffff00; } /* Amarelo */
+    100% { background-color: #ff0000; border-color: #ff0000; } /* Volta */
+}
+
+/* 5. FORMULÁRIO E RODAPÉ */
+input, textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    background: #222;
+    border: 1px solid #444;
+    color: white;
+}
+
+footer {
+    text-align: center;
+    padding: 30px;
+    background: #000;
+    font-size: 0.8rem;
+}
