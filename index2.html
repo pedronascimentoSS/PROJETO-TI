@@ -3,88 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>O Derby: A Briga - Oficial</title>
+    <title>Último Clássico - Oficial</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="estilo.css">
+
     <style>
-        /* Estilo do Pop-up de Download */
-        #tela-download {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-        .caixa-download {
-            border: 4px solid #fff;
-            padding: 40px;
-            background: #000;
-            max-width: 90%;
-        }
-        #contagem {
-            font-family: 'Press Start 2P', cursive;
-            font-size: 50px;
-            color: red;
-            margin: 20px 0;
-        }
-        .btn-final {
-            background: #00ff00;
-            color: #000;
-            padding: 15px;
-            text-decoration: none;
-            font-weight: bold;
-            display: inline-block;
-            margin-top: 20px;
-            border: 2px solid #fff;
-        }
+       
     </style>
 </head>
+
 <body>
 
-    <div id="tela-download">
-        <div class="caixa-download">
-            <h2 style="font-family: 'Press Start 2P', cursive; font-size: 14px; color: white;">PREPARANDO ARQUIVOS...</h2>
-            <div id="contagem">5</div>
-            <div id="area-botao"></div> <br>
-            <button onclick="fecharDownload()" style="background: #444; color: white; padding: 10px; width: auto;">CANCELAR</button>
-        </div>
-    </div>
+    <header style="text-align: center;">
+        <img src="icone (4).png" alt="Logo do jogo" class="logo">
 
-    <header>
-        <h1>O DERBY: A BRIGA</h1>
+     
+
         <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#sobre">Quem Somos</a></li>
-                <li><a href="#contato">Contato</a></li>
-                <li><a href="javascript:void(0)" onclick="abrirDownload()" class="btn-destaque">Baixar</a></li>
+            <ul style="list-style: none; padding: 0;">
+                <li>
+                    <a href="index.html" class="btn-destaque">Página Inicial</a>
+                </li>
             </ul>
         </nav>
     </header>
 
     <main>
-        <section id="home">
+        <section id="home" style="text-align: center; margin-top: 100px;">
             <h2>O DERBY CONTINUA!</h2>
             <p>A confusão começou no túnel e só você pode representar o bando de loucos.</p>
-            <button onclick="abrirDownload()">IR PARA DOWNLOAD</button>
-        </section>
-
-        <section id="sobre">
-            <h2>Quem Somos</h2>
-            <p>Desenvolvedores independentes criando o melhor beat'em up alvinegro direto para o seu PC.</p>
-        </section>
-
-        <section id="contato">
-            <h2>Contato</h2>
-            <form action="#">
-                <input type="text" placeholder="Seu nome" required>
-                <input type="email" placeholder="Seu e-mail" required>
-                <textarea placeholder="Sua mensagem"></textarea>
-                <button type="submit">ENVIAR MENSAGEM</button>
-            </form>
+            
+            <a href="jogo.html">
+                <button style="padding: 20px; font-size: 18px;">JOGAR AGORA</button>
+            </a>
         </section>
     </main>
 
@@ -92,37 +43,7 @@
         <p>&copy; 2026 Desenvolvido por <strong>Pedro Nascimento</strong></p>
     </footer>
 
-    <script>
-        function abrirDownload() {
-            // Mostra o pop-up
-            document.getElementById('tela-download').style.display = 'flex';
-            document.getElementById('area-botao').innerHTML = ''; // Limpa o botão se já existia
-            
-            let n = 5;
-            let display = document.getElementById('contagem');
-            display.innerText = n;
-            display.style.color = "red";
-
-            let intervalo = setInterval(function() {
-                n--;
-                if (n > 0) {
-                    display.innerText = n;
-                } else {
-                    clearInterval(intervalo);
-                    display.innerText = "PRONTO!";
-                    display.style.color = "#00ff00";
-                    
-                    // Coloca o botão de baixar na tela
-                    document.getElementById('area-botao').innerHTML = '<a href="jogo.zip" class="btn-final">CLIQUE PARA BAIXAR .ZIP</a>';
-                }
-            }, 1000);
-        }
-
-        function fecharDownload() {
-            document.getElementById('tela-download').style.display = 'none';
-            // Recarrega apenas se necessário, ou só esconde
-        }
-    </script>
+   
 
 </body>
 </html>
