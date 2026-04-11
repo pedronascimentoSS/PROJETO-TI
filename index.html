@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimo Classico - Oficial</title>
+    <link href="icone (4).png" rel="icon">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body class="pagina-inicial">
+
+    <div id="overlay">
+        <div class="modal-entrada">
+            <h2>ANTES DE ENTRAR</h2>
+            <input type="text" id="nome" placeholder="Digite seu nome">
+            <input type="number" id="idade" placeholder="Digite sua idade">
+            <button onclick="liberarSite()">ENTRAR</button>
+            <p id="erro"></p>
+        </div>
+    </div>
+
+    <header>
+        <img src="icone (4).png" alt="Logo do jogo" class="logo">
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#sobre">Quem Somos</a></li>
+                <li><a href="#contato">Contato</a></li>
+                <li><a href="index2.html" class="btn-destaque">JOGAR</a></li>
+                <li><button id="tema-btn" onclick="trocarTema()">🌙/☀️</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="conteudo-site">
+        <section id="home">
+            <h2 id="saudacao">O DERBY CONTINUA!</h2>
+            <p>A confusão começou no túnel e só você pode representar o bando de loucos.</p>
+            <button onclick="window.location.href='index2.html'">IR PARA O JOGO</button>
+        </section>
+
+        <section id="sobre">
+            <h2>Quem Somos</h2>
+            <p></p>
+        </section>
+
+        <section id="contato">
+            <h2>Contato</h2>
+            <form>
+                <input type="text" placeholder="Seu nome">
+                <input type="email" placeholder="Seu e-mail">
+                <textarea placeholder="Sua mensagem"></textarea>
+                <button type="submit">ENVIAR MENSAGEM</button>
+            </form>
+        </section>
+
+        <section id="download">
+            <h2>JOGAR AGORA</h2>
+            <p>Versão Alpha disponível. Clique no botão abaixo para jogar.</p>
+            <button onclick="window.location.href='index2.html'" style="background: #28a745; color: white; margin-top: 10px;">JOGAR AGORA</button>
+        </section>
+    </main>
+
+    <footer id="rodape-site">
+        <p>&copy; 2026 Desenvolvido por <strong>Pedro Nascimento</strong></p>
+    </footer>
+
+    <script>
+        const idadeMinima = 18;
+
+        function liberarSite() {
+            const nome = document.getElementById("nome").value.trim();
+            const idade = parseInt(document.getElementById("idade").value);
+            const erro = document.getElementById("erro");
+
+            if (!nome || isNaN(idade)) {
+                erro.textContent = "Preencha nome e idade corretamente.";
+                return;
+            }
+
+            if (idade < idadeMinima) {
+                erro.textContent = "Você não tem idade suficiente para acessar o site.";
+                return;
+            }
+
+            localStorage.setItem("nomeUsuario", nome);
+            localStorage.setItem("idadeUsuario", idade);
+
+            document.getElementById("overlay").style.display = "none";
+            document.getElementById("conteudo-site").style.display = "block";
+            document.getElementById("rodape-site").style.display = "block";
+            document.getElementById("saudacao").textContent = "O DERBY CONTINUA, " + nome.toUpperCase() + "!";
+        }
+
+        function trocarTema() {
+            document.body.classList.toggle("light-mode");
+
+            if (document.body.classList.contains("light-mode")) {
+                localStorage.setItem("tema", "light");
+            } else {
+                localStorage.setItem("tema", "dark");
+            }
+        }
+
+        window.onload = function () {
+            const temaSalvo = localStorage.getItem("tema");
+            if (temaSalvo === "light") {
+                document.body.classList.add("light-mode");
+            }
+
+            const nomeSalvo = localStorage.getItem("nomeUsuario");
+            const idadeSalva = parseInt(localStorage.getItem("idadeUsuario"));
+
+            if (nomeSalvo && idadeSalva >= idadeMinima) {
+                document.getElementById("overlay").style.display = "none";
+                document.getElementById("conteudo-site").style.display = "block";
+                document.getElementById("rodape-site").style.display = "block";
+                document.getElementById("saudacao").textContent = "O DERBY CONTINUA, " + nomeSalvo.toUpperCase() + "!";
+            }
+        };
+    </script>
+
+</body>
+</html>
