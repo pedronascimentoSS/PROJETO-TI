@@ -225,11 +225,13 @@ body.pagina-inicial #overlay {
     background: transparent;
     color: #fff;
     cursor: pointer;
+    width: auto;
 }
 
 #tema-btn:hover {
     background: #fff;
     color: #000;
+    animation: none;
 }
 
 body.light-mode #tema-btn {

@@ -28,7 +28,7 @@
                 <li><a href="#sobre">Quem Somos</a></li>
                 <li><a href="#contato">Contato</a></li>
                 <li><a href="index2.html" class="btn-destaque">JOGAR</a></li>
-                <li><button id="tema-btn" onclick="trocarTema()">🌙/☀️</button></li>
+                <li><button id="tema-btn" type="button" onclick="trocarTema()">🌙/☀️</button></li>
             </ul>
         </nav>
     </header>
@@ -37,7 +37,7 @@
         <section id="home">
             <h2 id="saudacao">O DERBY CONTINUA!</h2>
             <p>A confusão começou no túnel e só você pode representar o bando de loucos.</p>
-            <button onclick="window.location.href='index2.html'">IR PARA O JOGO</button>
+            <button type="button" onclick="window.location.href='index2.html'">IR PARA O JOGO</button>
         </section>
 
         <section id="sobre">
@@ -58,7 +58,7 @@
         <section id="download">
             <h2>JOGAR AGORA</h2>
             <p>Versão Alpha disponível. Clique no botão abaixo para jogar.</p>
-            <button onclick="window.location.href='index2.html'" style="background: #28a745; color: white; margin-top: 10px;">JOGAR AGORA</button>
+            <button type="button" onclick="window.location.href='index2.html'" style="background: #28a745; color: white; margin-top: 10px;">JOGAR AGORA</button>
         </section>
     </main>
 
@@ -71,7 +71,7 @@
 
         function liberarSite() {
             const nome = document.getElementById("nome").value.trim();
-            const idade = parseInt(document.getElementById("idade").value);
+            const idade = parseInt(document.getElementById("idade").value, 10);
             const erro = document.getElementById("erro");
 
             if (!nome || isNaN(idade)) {
@@ -110,7 +110,7 @@
             }
 
             const nomeSalvo = localStorage.getItem("nomeUsuario");
-            const idadeSalva = parseInt(localStorage.getItem("idadeUsuario"));
+            const idadeSalva = parseInt(localStorage.getItem("idadeUsuario"), 10);
 
             if (nomeSalvo && idadeSalva >= idadeMinima) {
                 document.getElementById("overlay").style.display = "none";
