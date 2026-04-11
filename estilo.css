@@ -13,12 +13,59 @@ body {
     font-family: 'Arial Black', sans-serif;
     color: white;
     background-color: #000;
-    /* IMAGEM DE FUNDO FIXA */
     background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('fundo.png');
     background-size: cover;
     background-attachment: fixed;
     background-position: center;
     overflow-x: hidden;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Áreas escondidas antes de liberar o site */
+#conteudo-site,
+#rodape-site {
+    display: none;
+}
+
+/* MODO CLARO */
+body.light-mode {
+    color: #111;
+    background-color: #f2f2f2;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.75)), url('fundo.png');
+}
+
+body.light-mode header {
+    background: rgba(255, 255, 255, 0.95);
+    border-bottom: 2px solid #111;
+}
+
+body.light-mode nav a {
+    color: #111;
+    border: 1px solid #111;
+}
+
+body.light-mode nav a:not(.btn-destaque):hover {
+    background: #111;
+    color: #fff;
+}
+
+body.light-mode section {
+    background: rgba(255, 255, 255, 0.92);
+    border-left: 8px solid #111;
+    color: #111;
+}
+
+body.light-mode input,
+body.light-mode textarea {
+    background: #fff;
+    color: #111;
+    border: 1px solid #aaa;
+}
+
+body.light-mode footer {
+    background: #fff;
+    color: #111;
+    border-top: 1px solid #ccc;
 }
 
 /* 2. CABEÇALHO E MENU */
@@ -26,7 +73,6 @@ header {
     background: rgba(0, 0, 0, 0.9);
     padding: 20px 0;
     padding-top: 5px;
-    flex-direction: column;
     border-bottom: 2px solid #fff;
     display: flex;
     flex-direction: column;
@@ -43,13 +89,13 @@ nav ul {
     list-style: none;
     padding: 0;
     margin: 1px 0 0 0;
-
     display: flex;
     justify-content: center;
     gap: 10px;
     align-items: center;
     margin-top: -20px;
     transform: translateY(-15px);
+    flex-wrap: wrap;
 }
 
 /* Links normais do menu */
@@ -68,20 +114,18 @@ nav a:not(.btn-destaque):hover {
     color: #000;
 }
 
-/* --- O BOTÃO DE DESTAQUE --- */
+/* BOTÃO DE DESTAQUE */
 .btn-destaque {
     border: 2px solid #fff;
     font-weight: bold;
-    /* Ele já fica animado o tempo todo */
     animation: rgbSuave 3s linear infinite;
 }
 
 .btn-destaque:hover {
-    transform: scale(1, 1); /* Aumenta um pouco no hover */
-    filter: brightness(1.2); /* Dá uma "acesa" extra */
+    transform: scale(1, 1);
+    filter: brightness(1.2);
 }
 
-/* Reaproveitando a animação */
 @keyframes rgbSuave {
     0%   { background-color: #ff0000; border-color: #ff0000; color: #fff; }
     20%  { background-color: #ffff00; border-color: #ffff00; color: #000; }
@@ -91,11 +135,11 @@ nav a:not(.btn-destaque):hover {
     100% { background-color: #ff0000; border-color: #ff0000; color: #fff; }
 }
 
-/* 3. CONTEÚDO PRINCIPAL */
 main {
     max-width: 700px;
     margin: 0 auto;
     padding: 20px;
+    padding-bottom: 120px;
 }
 
 section {
@@ -104,9 +148,9 @@ section {
     margin: 40px 0;
     border-radius: 5px;
     border-left: 8px solid #fff;
+    transition: 0.3s;
 }
 
-/* 4. BOTÕES COM EFEITO RGB (PISCANDO) */
 button {
     background: #fff;
     color: #000;
@@ -117,6 +161,7 @@ button {
     text-transform: uppercase;
     cursor: pointer;
     font-size: 1rem;
+    transition: 0.3s;
 }
 
 button:hover {
@@ -133,7 +178,6 @@ button:hover {
     100% { background-color: #ff0000; border-color: #ff0000; }
 }
 
-/* 5. FORMULÁRIO E RODAPÉ */
 input, textarea {
     width: 100%;
     padding: 12px;
@@ -141,6 +185,7 @@ input, textarea {
     background: #222;
     border: 1px solid #444;
     color: white;
+    transition: 0.3s;
 }
 
 footer {
@@ -153,9 +198,9 @@ footer {
     left: 0;
     width: 100%;
     color: #fff;
+    z-index: 10;
 }
 
-/* LOGO */
 .logo {
     width: 160px;
     max-width: 90%;
@@ -170,7 +215,128 @@ footer {
     transform: scale(1.05);
 }
 
-
 .bnt-jogar {
     margin-top: 5px;
+}
+
+/* TELA DE ENTRADA */
+#overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.96);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+    padding: 20px;
+}
+
+.modal-entrada {
+    width: 100%;
+    max-width: 420px;
+    background: rgba(15, 15, 15, 0.98);
+    border: 2px solid #fff;
+    border-radius: 10px;
+    padding: 30px 25px;
+    text-align: center;
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.12);
+}
+
+.modal-entrada h2 {
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+    color: #fff;
+}
+
+.modal-entrada input {
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+.modal-entrada button {
+    margin-top: 5px;
+}
+
+#erro {
+    color: #ff4d4d;
+    margin-top: 12px;
+    font-size: 0.9rem;
+    min-height: 20px;
+}
+
+body.light-mode #overlay {
+    background: rgba(255, 255, 255, 0.92);
+}
+
+body.light-mode .modal-entrada {
+    background: #ffffff;
+    border: 2px solid #111;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.12);
+}
+
+body.light-mode .modal-entrada h2 {
+    color: #111;
+}
+
+/* BOTÃO DE TEMA */
+#tema-btn {
+    width: auto;
+    padding: 8px 14px;
+    border: 1px solid #fff;
+    background: transparent;
+    color: #fff;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+#tema-btn:hover {
+    animation: none;
+    transform: scale(1.05);
+    background: #fff;
+    color: #000;
+}
+
+body.light-mode #tema-btn {
+    border: 1px solid #111;
+    color: #111;
+    background: transparent;
+}
+
+body.light-mode #tema-btn:hover {
+    background: #111;
+    color: #fff;
+}
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+    header {
+        min-height: auto;
+        padding: 20px 10px;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 10px;
+        transform: none;
+    }
+
+    nav a,
+    #tema-btn {
+        display: block;
+        width: 220px;
+        text-align: center;
+    }
+
+    section {
+        padding: 20px;
+    }
+
+    .modal-entrada {
+        padding: 25px 20px;
+    }
+
+    .modal-entrada h2 {
+        font-size: 1.1rem;
+    }
 }

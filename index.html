@@ -10,6 +10,16 @@
 </head>
 <body>
 
+    <div id="overlay">
+        <div class="modal-entrada">
+            <h2>ANTES DE ENTRAR</h2>
+            <input type="text" id="nome" placeholder="Digite seu nome">
+            <input type="number" id="idade" placeholder="Digite sua idade">
+            <button onclick="liberarSite()">ENTRAR</button>
+            <p id="erro"></p>
+        </div>
+    </div>
+
     <header>
         <img src="icone (4).png" alt="Logo do jogo" class="logo">
         <nav>
@@ -18,13 +28,14 @@
                 <li><a href="#sobre">Quem Somos</a></li>
                 <li><a href="#contato">Contato</a></li>
                 <li><a href="index2.html" class="btn-destaque">JOGAR</a></li>
+                <li><button id="tema-btn" onclick="trocarTema()">🌙/☀️</button></li>
             </ul>
         </nav>
     </header>
 
-    <main>
+    <main id="conteudo-site">
         <section id="home">
-            <h2>O DERBY CONTINUA!</h2>
+            <h2 id="saudacao">O DERBY CONTINUA!</h2>
             <p>A confusão começou no túnel e só você pode representar o bando de loucos.</p>
             <button onclick="window.location.href='index2.html'">IR PARA O JOGO</button>
         </section>
@@ -51,9 +62,64 @@
         </section>
     </main>
 
-    <footer>
+    <footer id="rodape-site">
         <p>&copy; 2026 Desenvolvido por <strong>Pedro Nascimento</strong></p>
     </footer>
+
+    <script>
+        const idadeMinima = 18;
+
+        function liberarSite() {
+            const nome = document.getElementById("nome").value.trim();
+            const idade = parseInt(document.getElementById("idade").value);
+            const erro = document.getElementById("erro");
+
+            if (!nome || isNaN(idade)) {
+                erro.textContent = "Preencha nome e idade corretamente.";
+                return;
+            }
+
+            if (idade < idadeMinima) {
+                erro.textContent = "Você não tem idade suficiente para acessar o site.";
+                return;
+            }
+
+            localStorage.setItem("nomeUsuario", nome);
+            localStorage.setItem("idadeUsuario", idade);
+
+            document.getElementById("overlay").style.display = "none";
+            document.getElementById("conteudo-site").style.display = "block";
+            document.getElementById("rodape-site").style.display = "block";
+            document.getElementById("saudacao").textContent = "O DERBY CONTINUA, " + nome.toUpperCase() + "!";
+        }
+
+        function trocarTema() {
+            document.body.classList.toggle("light-mode");
+
+            if (document.body.classList.contains("light-mode")) {
+                localStorage.setItem("tema", "light");
+            } else {
+                localStorage.setItem("tema", "dark");
+            }
+        }
+
+        window.onload = function () {
+            const temaSalvo = localStorage.getItem("tema");
+            if (temaSalvo === "light") {
+                document.body.classList.add("light-mode");
+            }
+
+            const nomeSalvo = localStorage.getItem("nomeUsuario");
+            const idadeSalva = parseInt(localStorage.getItem("idadeUsuario"));
+
+            if (nomeSalvo && idadeSalva >= idadeMinima) {
+                document.getElementById("overlay").style.display = "none";
+                document.getElementById("conteudo-site").style.display = "block";
+                document.getElementById("rodape-site").style.display = "block";
+                document.getElementById("saudacao").textContent = "O DERBY CONTINUA, " + nomeSalvo.toUpperCase() + "!";
+            }
+        };
+    </script>
 
 </body>
 </html>

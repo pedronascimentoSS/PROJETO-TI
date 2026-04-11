@@ -4,12 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Último Clássico - Oficial</title>
+
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="estilo.css">
-
-    <style>
-       
-    </style>
 </head>
 
 <body>
@@ -17,12 +14,13 @@
     <header style="text-align: center;">
         <img src="icone (4).png" alt="Logo do jogo" class="logo">
 
-     
-
         <nav>
             <ul style="list-style: none; padding: 0;">
                 <li>
                     <a href="index.html" class="btn-destaque">Página Inicial</a>
+                </li>
+                <li>
+                    <button id="tema-btn" onclick="trocarTema()">🌙/☀️</button>
                 </li>
             </ul>
         </nav>
@@ -32,7 +30,7 @@
         <section id="home" style="text-align: center; margin-top: 100px;">
             <h2>O DERBY CONTINUA!</h2>
             <p>A confusão começou no túnel e só você pode representar o bando de loucos.</p>
-            
+
             <a href="../JOGO/index.html">
                 <button style="padding: 20px; font-size: 18px;">JOGAR AGORA</button>
             </a>
@@ -43,7 +41,24 @@
         <p>&copy; 2026 Desenvolvido por <strong>Pedro Nascimento</strong></p>
     </footer>
 
-   
+    <script>
+        function trocarTema() {
+            document.body.classList.toggle("light-mode");
+
+            if (document.body.classList.contains("light-mode")) {
+                localStorage.setItem("tema", "light");
+            } else {
+                localStorage.setItem("tema", "dark");
+            }
+        }
+
+        window.onload = function () {
+            const temaSalvo = localStorage.getItem("tema");
+            if (temaSalvo === "light") {
+                document.body.classList.add("light-mode");
+            }
+        };
+    </script>
 
 </body>
 </html>
